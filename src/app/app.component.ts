@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ITIDemo';
+  projectTitle:string="Angular ITI Demo"
 }
