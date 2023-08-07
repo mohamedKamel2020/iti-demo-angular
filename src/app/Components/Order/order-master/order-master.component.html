@@ -1,0 +1,21 @@
+<h2>Create your order</h2>
+<div class="mb-3">
+  <label for="prdCat" class="form-label">Category:</label>
+  <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID">
+    <option value="0" selected>All</option>
+    <option *ngFor="let cat of catList" [value]="cat.id">
+      {{cat.name}}
+    </option>
+  </select>
+</div>
+<hr>
+<div class="bg-warning">
+                                                      <!--Event subscrib-->
+  <app-product-list [sentCategoryId]="selectedCatID" (totalPriceChanged)="onTotalPriceChaged($event)"></app-product-list>
+</div>
+<div>
+  <h3>Enter Your Name :</h3>
+  <input #clientName type="text" class="form-control">
+</div>
+<hr>
+<h3>Order Total Pric : {{receivedOrderTotalPric}}</h3>

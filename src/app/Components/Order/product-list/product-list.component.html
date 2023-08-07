@@ -1,42 +1,40 @@
 <div class="container mt-4">
-  <div class="mb-3">
-    <label for="prdCat" class="form-label">Category:</label>
-    <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID">
-      <option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</option>
-    </select>
-  </div>
-  <div>
-    [To be Removed] For Test
-    {{selectedCatID}}
+
+  <!-- <div>
+    [To be Removed] For Test {{selectedCatID}}
     <br>
     <button type="button" class="btn btn-primary" (click)="changeCat()">(Test) Change Category</button>
-  </div>
+  </div> -->
   <hr>
-  <table class="table table-primary">
+  <table class="table table-info">
     <thead>
       <tr>
         <th scope="col">No.</th>
         <th scope="col">Name</th>
         <th scope="col">Image</th>
         <th scope="col">Av. Quantity</th>
-        <th scope="col">Price</th>
+        <th scope="col">Price in USD</th>
+        <th scope="col">Price in EGP</th>
         <th>Count</th>
         <th>Buy</th>
       </tr>
     </thead>
     <tbody>
-      <!-- <tr *ngFor="let prd of prdList; index as i">-->
+      <!--
+           <tr *ngFor="let prd of prdList; index as i">-->
       <!-- <tr *ngFor="let prd of prdList; let i = index;trackBy:prdTrackByFn"
             [class.d-none]="selectedCatID!=prd.categoryID"
             [style.background-color]="(prd.quantity==0)?'yellow':'lightgray'"> -->
       <!-- <tr *ngFor="let prd of prdList; let i = index" [hidden]="prd.quantity==0"> -->
       <!-- <ng-container *ngFor="let prd of prdList; let i = index"> </ng-container>
-        <tr *ngIf="selectedCatID==prd.categoryID"> -->
-        <tr *ngFor="let prd of prdList; index as i" [ngClass]="{'bg-warning':prd.quantity==0,'text-red':prd.quantity==0}">
+      -->
+      <!-- <tr *ngIf="selectedCatID==prd.categoryID">  -->
+
+        <tr *ngFor="let prd of prdListOFCategory; let i =index">
           <td>{{i+1}}</td>
                 <!-- safe neviagation operator (?)-->
           <td>{{prd?.name}}</td>
-          <td><img [src]="prd?.imgURL" alt=""></td>
+          <td><img LightBox="red" defaultColor="gray" [src]="prd?.imgURL" alt=""></td>
           <td>
             <!-- <div *ngIf="prd.quantity!=0;else OutOfStock">{{prd.quantity}}</div>
             <ng-template #OutOfStock>Out of Stock</ng-template> -->
@@ -47,17 +45,14 @@
               <div *ngSwitchDefault>{{prd.quantity}}</div>
             </ng-container>
           </td>
-          <td>{{prd?.price}}</td>
+          <td>{{prd?.price|currency:'USD':'symbol'}}</td>
+          <td>{{prd.price|USDToEGP|currency:'EGP':'code'}}</td>
           <!-- template variable reference  #itemsCount -->
           <td><input #itemsCount type="number" class="form-control"></td>
           <td><button type="button" class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value)">Buy</button>
           </td>
         </tr>
-
     </tbody>
   </table>
-  <hr>
-  <h3>
-    Order Total price:{{orderTotalPrice}}
-  </h3>
+<hr>
 </div>
