@@ -25,7 +25,6 @@ export class OrderMasterComponent implements AfterViewInit{
   ngAfterViewInit(): void {
     this.clientNameInput.nativeElement.value="Your name here";
     this.clientNameInput.nativeElement.style.border="2px solid red";
-    console.log(this.ProductListComponentObject.prdList);
   }
   //Event subscrib
   onTotalPriceChaged(totalPrice: number) {

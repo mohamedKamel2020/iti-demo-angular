@@ -30,29 +30,33 @@
       -->
       <!-- <tr *ngIf="selectedCatID==prd.categoryID">  -->
 
-        <tr *ngFor="let prd of prdListOFCategory; let i =index">
-          <td>{{i+1}}</td>
-                <!-- safe neviagation operator (?)-->
-          <td>{{prd?.name}}</td>
-          <td><img LightBox="red" defaultColor="gray" [src]="prd?.imgURL" alt=""></td>
-          <td>
-            <!-- <div *ngIf="prd.quantity!=0;else OutOfStock">{{prd.quantity}}</div>
+      <tr *ngFor="let prd of prdListOFCategory; let i =index">
+        <td>{{i+1}}</td>
+        <!-- safe neviagation operator (?)-->
+        <td>{{prd?.name}}</td>
+        <td><img LightBox="red" defaultColor="gray" [src]="prd?.imgURL" alt=""></td>
+        <td>
+          <!-- <div *ngIf="prd.quantity!=0;else OutOfStock">{{prd.quantity}}</div>
             <ng-template #OutOfStock>Out of Stock</ng-template> -->
-            <ng-container [ngSwitch]="prd.quantity">
-              <div *ngSwitchCase="0">Out of stock</div>
-              <div *ngSwitchCase="1">last item!</div>
-              <div *ngSwitchCase="2">Last 2 items</div>
-              <div *ngSwitchDefault>{{prd.quantity}}</div>
-            </ng-container>
-          </td>
-          <td>{{prd?.price|currency:'USD':'symbol'}}</td>
-          <td>{{prd.price|USDToEGP|currency:'EGP':'code'}}</td>
-          <!-- template variable reference  #itemsCount -->
-          <td><input #itemsCount type="number" class="form-control"></td>
-          <td><button type="button" class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value)">Buy</button>
-          </td>
-        </tr>
+          <ng-container [ngSwitch]="prd.quantity">
+            <div *ngSwitchCase="0">Out of stock</div>
+            <div *ngSwitchCase="1">last item!</div>
+            <div *ngSwitchCase="2">Last 2 items</div>
+            <div *ngSwitchDefault>{{prd.quantity}}</div>
+          </ng-container>
+        </td>
+        <td>{{prd?.price|currency:'USD':'symbol'}}</td>
+        <td>{{prd.price|USDToEGP|currency:'EGP':'code'}}</td>
+        <!-- template variable reference  #itemsCount -->
+        <td><input #itemsCount type="number" class="form-control"></td>
+        <td>
+          <a name="" id="" class="btn btn-primary" [routerLink]="['/Products',prd.id]" role="button">Details</a>
+          <!-- <button type="button" class="btn btn-secondary" (click)="openProductDetails(prd.id)">Details</button> -->
+        </td>
+        <td> <button type="button" class="btn btn-secondary" (click)="buy(prd.price,itemsCount.value)">Buy</button>
+        </td>
+      </tr>
     </tbody>
   </table>
-<hr>
+  <hr>
 </div>
